@@ -22,28 +22,6 @@ class SavedViewController extends GetxController {
     trips.value = box.values.toList();
   }
 
-  Future<void> deleteTrip(int index) async {
-    try {
-      final box = await Hive.openBox<TripModel>('trips');
-      await box.deleteAt(index);
-      await loadTrips();
-      Get.snackbar(
-        'Success',
-        'Trip deleted successfully',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-      );
-    } catch (e) {
-      print('Error deleting trip: $e');
-      Get.snackbar(
-        'Error',
-        'Failed to delete trip',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
-    }
-  }
-
   Future<List<LatLng>> _getRouteCoordinates(TripModel trip) async {
     try {
       final response = await http.get(

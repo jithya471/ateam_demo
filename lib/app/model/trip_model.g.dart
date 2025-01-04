@@ -24,7 +24,6 @@ class TripModelAdapter extends TypeAdapter<TripModel> {
       endLatitude: fields[4] as double,
       endLongitude: fields[5] as double,
       distance: fields[6] as double,
-      savedAt: fields[7] as DateTime,
     );
   }
 
@@ -45,9 +44,7 @@ class TripModelAdapter extends TypeAdapter<TripModel> {
       ..writeByte(5)
       ..write(obj.endLongitude)
       ..writeByte(6)
-      ..write(obj.distance)
-      ..writeByte(7)
-      ..write(obj.savedAt);
+      ..write(obj.distance);
   }
 
   @override

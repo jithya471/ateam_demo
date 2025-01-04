@@ -116,16 +116,9 @@ class _SavedViewState extends State<SavedView> {
                                             ),
                                           ],
                                         ),
-                                        IconButton(
-                                          icon: Icon(
-                                            Icons.delete_outline,
-                                            color: Appcolors.lightGrey,
-                                          ),
-                                          onPressed: () =>
-                                              controller.deleteTrip(index),
-                                        ),
                                       ],
                                     ),
+                                    const SizedBox(height: verticalPadding),
                                     SizedBox(
                                       height: 130,
                                       child: MapboxMap(

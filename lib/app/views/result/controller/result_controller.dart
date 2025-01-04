@@ -78,7 +78,7 @@ class ResultController extends GetxController {
 
       await _initializeMap();
     } catch (e) {
-      print('Error in onMapCreated: $e');
+      Get.snackbar('Error in onMapCreated', e.toString());
     }
   }
 
@@ -224,7 +224,6 @@ class ResultController extends GetxController {
         endLatitude: endLocation.value!.latitude,
         endLongitude: endLocation.value!.longitude,
         distance: distance.value,
-        savedAt: DateTime.now(),
       );
 
       final box = await Hive.openBox<TripModel>('trips');

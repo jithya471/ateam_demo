@@ -40,7 +40,7 @@ class _HomeViewState extends State<HomeView> {
                     onMapCreated: controller.onStartMapCreated,
                     onSearch: () => controller.searchLocation(isStart: true),
                     hintText: 'Start location',
-                    iconColor: Colors.red,
+                    iconColor: Appcolors.lightGrey,
                   ),
                   const SizedBox(height: 16),
                   _buildLocationContainer(
@@ -48,7 +48,7 @@ class _HomeViewState extends State<HomeView> {
                     onMapCreated: controller.onEndMapCreated,
                     onSearch: () => controller.searchLocation(isStart: false),
                     hintText: 'End location',
-                    iconColor: Colors.blue,
+                    iconColor: Appcolors.lightGrey,
                   ),
                 ],
               ),
