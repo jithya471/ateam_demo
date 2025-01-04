@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-part 'trip_model.g.dart'; // This file will be generated
+part 'trip_model.g.dart'; 
 
 @HiveType(typeId: 0)
 class TripModel extends HiveObject {

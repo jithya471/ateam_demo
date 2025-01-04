@@ -1,10 +1,10 @@
 import 'package:ateam_demo/app/global/buttons.dart';
 import 'package:ateam_demo/app/global/header.dart';
+import 'package:ateam_demo/app/model/location_data.dart';
 import 'package:ateam_demo/app/routes/app_routes.dart';
 import 'package:ateam_demo/app/utils/colors.dart';
 import 'package:ateam_demo/app/utils/constants.dart';
 import 'package:ateam_demo/app/utils/styles.dart';
-import 'package:ateam_demo/app/views/result/controller/result_controller.dart';
 import 'package:ateam_demo/app/views/saved/controller/saved_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -129,7 +129,7 @@ class _SavedViewState extends State<SavedView> {
                                     SizedBox(
                                       height: 130,
                                       child: MapboxMap(
-                                        accessToken: controller.accessToken,
+                                        accessToken: token,
                                         styleString:
                                             'mapbox://styles/mapbox/streets-v11',
                                         initialCameraPosition: CameraPosition(

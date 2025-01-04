@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:ateam_demo/app/model/location_data.dart';
 import 'package:ateam_demo/app/model/trip_model.dart';
+import 'package:ateam_demo/app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hive/hive.dart';
@@ -18,8 +20,7 @@ class ResultController extends GetxController {
   final polylineCoordinates = RxList<LatLng>([]);
   final isLoading = RxBool(true);
   RxString isFrom = ''.obs;
-  final String accessToken =
-      'pk.eyJ1IjoiYWtoaWxsZXZha3VtYXIiLCJhIjoiY2x4MDcwYzZ4MGl2aTJqcmFxbXZzc3lndiJ9.9sxfvrADlA25b1CHX2VuDA';
+ 
   @override
   void onInit() {
     super.onInit();
@@ -148,7 +149,7 @@ class ResultController extends GetxController {
         Uri.parse('https://api.mapbox.com/directions/v5/mapbox/driving/'
             '${startLocation.value!.longitude},${startLocation.value!.latitude};'
             '${endLocation.value!.longitude},${endLocation.value!.latitude}'
-            '?geometries=geojson&access_token=$accessToken'),
+            '?geometries=geojson&access_token=$token'),
       );
 
       if (response.statusCode == 200) {
@@ -246,20 +247,4 @@ class ResultController extends GetxController {
       );
     }
   }
-}
-
-class LocationData {
-  final String name;
-  final double latitude;
-  final double longitude;
-
-  LocationData({
-    required this.name,
-    required this.latitude,
-    required this.longitude,
-  });
-
-  @override
-  String toString() =>
-      'LocationData(name: $name, lat: $latitude, lng: $longitude)';
 }

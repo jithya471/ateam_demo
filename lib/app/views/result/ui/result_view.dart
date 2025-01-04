@@ -48,7 +48,7 @@ class ResultView extends StatelessWidget {
   Widget _buildMapSection() {
     return Expanded(
       child: MapboxMap(
-        accessToken: controller.accessToken,
+        accessToken: token,
         styleString: 'mapbox://styles/mapbox/streets-v11',
         initialCameraPosition: CameraPosition(
           target: LatLng(
@@ -58,9 +58,6 @@ class ResultView extends StatelessWidget {
           zoom: 12,
         ),
         onMapCreated: controller.onMapCreated,
-        onStyleLoadedCallback: () {
-          print('Map style loaded');
-        },
       ),
     );
   }
@@ -94,13 +91,19 @@ class ResultView extends StatelessWidget {
                 children: [
                   SizedBox(height: Get.height * 0.05),
                   Text(
-                    'START LOCATION',
-                    style: style(12, FontWeight.w500,
-                        Appcolors.whitecolor.withOpacity(.8)),
+                    'YOUR LOCATION',
+                    style: style(
+                        12,
+                        FontWeight.w400,
+                        Appcolors.whitecolor.withOpacity(.8),
+                        null,
+                        null,
+                        null,
+                        FontStyle.italic),
                   ),
                   Text(
-                    controller.startLocation.value?.name ?? '',
-                    style: style(16, FontWeight.w500, Appcolors.whitecolor),
+                    controller.startLocation.value?.name.capitalizeFirst ?? '',
+                    style: style(18, FontWeight.w500, Appcolors.whitecolor),
                   ),
                   Row(
                     children: [
@@ -124,13 +127,8 @@ class ResultView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'END LOCATION',
-                    style: style(12, FontWeight.w500,
-                        Appcolors.whitecolor.withOpacity(.8)),
-                  ),
-                  Text(
-                    controller.endLocation.value?.name ?? '',
-                    style: style(16, FontWeight.w500, Appcolors.whitecolor),
+                    controller.endLocation.value?.name.capitalizeFirst ?? '',
+                    style: style(18, FontWeight.w500, Appcolors.whitecolor),
                   ),
                   Row(
                     children: [

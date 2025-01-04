@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:ateam_demo/app/model/trip_model.dart';
+import 'package:ateam_demo/app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -9,8 +10,6 @@ import 'package:http/http.dart' as http;
 
 class SavedViewController extends GetxController {
   final trips = <TripModel>[].obs;
-  final String accessToken =
-      'pk.eyJ1IjoiYWtoaWxsZXZha3VtYXIiLCJhIjoiY2x4MDcwYzZ4MGl2aTJqcmFxbXZzc3lndiJ9.9sxfvrADlA25b1CHX2VuDA';
 
   @override
   void onInit() {
@@ -51,7 +50,7 @@ class SavedViewController extends GetxController {
         Uri.parse('https://api.mapbox.com/directions/v5/mapbox/driving/'
             '${trip.startLongitude},${trip.startLatitude};'
             '${trip.endLongitude},${trip.endLatitude}'
-            '?geometries=geojson&access_token=$accessToken'),
+            '?geometries=geojson&access_token=$token'),
       );
 
       if (response.statusCode == 200) {
@@ -64,14 +63,11 @@ class SavedViewController extends GetxController {
               .toList();
         }
       }
-      // If API call fails, return direct line between points
       return [
         LatLng(trip.startLatitude, trip.startLongitude),
         LatLng(trip.endLatitude, trip.endLongitude),
       ];
     } catch (e) {
-      print('Error getting route: $e');
-      // Return direct line between points as fallback
       return [
         LatLng(trip.startLatitude, trip.startLongitude),
         LatLng(trip.endLatitude, trip.endLongitude),
@@ -82,10 +78,8 @@ class SavedViewController extends GetxController {
   Future<void> onMapCreated(
       MapboxMapController mapController, TripModel trip) async {
     try {
-      // Get route coordinates
       final routeCoordinates = await _getRouteCoordinates(trip);
 
-      // Add start location marker
       await mapController.addSymbol(
         SymbolOptions(
           geometry: LatLng(trip.startLatitude, trip.startLongitude),
@@ -98,7 +92,6 @@ class SavedViewController extends GetxController {
         ),
       );
 
-      // Add end location marker
       await mapController.addSymbol(
         SymbolOptions(
           geometry: LatLng(trip.endLatitude, trip.endLongitude),
@@ -111,7 +104,6 @@ class SavedViewController extends GetxController {
         ),
       );
 
-      // Draw polyline route
       await mapController.addLine(
         LineOptions(
           geometry: routeCoordinates,
@@ -121,7 +113,6 @@ class SavedViewController extends GetxController {
         ),
       );
 
-      // Calculate bounds that include all route coordinates
       double minLat = double.infinity;
       double maxLat = -double.infinity;
       double minLng = double.infinity;
@@ -134,7 +125,6 @@ class SavedViewController extends GetxController {
         maxLng = max(maxLng, point.longitude);
       }
 
-      // Add padding to bounds
       const padding = 0.1;
       await mapController.animateCamera(
         CameraUpdate.newLatLngBounds(
@@ -149,7 +139,7 @@ class SavedViewController extends GetxController {
         ),
       );
     } catch (e) {
-      print('Error setting up map: $e');
+      Get.snackbar('Error', 'Failed to set up map: $e');
     }
   }
 }

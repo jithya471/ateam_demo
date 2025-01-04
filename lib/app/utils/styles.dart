@@ -8,6 +8,7 @@ TextStyle style(
   double? tHeight,
   TextDecoration? underline,
   TextOverflow? overflow,
+  FontStyle? fontStyle, // Add this parameter
 ]) {
   return TextStyle(
     fontFamily: GoogleFonts.roboto(fontWeight: weight).fontFamily,
@@ -17,5 +18,6 @@ TextStyle style(
     height: tHeight ?? 1.5,
     overflow: overflow ?? TextOverflow.ellipsis,
     decoration: underline ?? TextDecoration.none,
+    fontStyle: fontStyle ?? FontStyle.normal, // Add this line
   );
 }

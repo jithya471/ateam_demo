@@ -1,6 +1,7 @@
 import 'dart:convert';
+import 'package:ateam_demo/app/model/location_data.dart';
 import 'package:ateam_demo/app/routes/app_routes.dart';
-import 'package:ateam_demo/app/views/result/controller/result_controller.dart';
+import 'package:ateam_demo/app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -19,9 +20,6 @@ class HomeController extends GetxController {
 
   final double defaultZoom = 15.0;
   final double markerSize = 2.5;
-
-  final String accessToken =
-      'pk.eyJ1IjoiYWtoaWxsZXZha3VtYXIiLCJhIjoiY2x4MDcwYzZ4MGl2aTJqcmFxbXZzc3lndiJ9.9sxfvrADlA25b1CHX2VuDA';
 
   void onStartMapCreated(MapboxMapController controller) {
     startMapController = controller;
@@ -116,7 +114,7 @@ class HomeController extends GetxController {
     try {
       final response = await http.get(
         Uri.parse(
-            'https://api.mapbox.com/geocoding/v5/mapbox.places/$searchText.json?access_token=$accessToken'),
+            'https://api.mapbox.com/geocoding/v5/mapbox.places/$searchText.json?access_token=$token'),
       );
 
       if (response.statusCode == 200) {

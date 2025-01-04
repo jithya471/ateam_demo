@@ -113,7 +113,7 @@ class _HomeViewState extends State<HomeView> {
             SizedBox(
               height: 130,
               child: MapboxMap(
-                accessToken: this.controller.accessToken,
+                accessToken: token,
                 styleString: 'mapbox://styles/mapbox/streets-v11',
                 initialCameraPosition: const CameraPosition(
                   target: LatLng(0, 0),
